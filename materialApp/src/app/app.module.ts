@@ -2,13 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
-
 import { Routes, RouterModule } from '@angular/router';
 
+import { AppComponent } from './app.component';
+import { ContactmanagerModule } from './contactmanager/contactmanager.module'
+
 const routes: Routes = [
-  {path: 'demo', loadChildren: './demo/demo.module#DemoModule' },
-  {path: '**', redirectTo: 'demo'}
+  { path: 'contactmanager', loadChildren: './contactmanager/contactmanager.module#ContactmanagerModule' },
+  { path: 'demo', loadChildren: './demo/demo.module#DemoModule' },
+  { path: '**', redirectTo: 'ContactmanagerModule' }
 ];
 
 @NgModule({
@@ -18,6 +20,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ContactmanagerModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
