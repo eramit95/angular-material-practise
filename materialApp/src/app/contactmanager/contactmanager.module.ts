@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { MaterialModule } from './../shared/material.module';
 import { NgModule } from '@angular/core';
@@ -27,7 +28,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MaterialModule,
     HttpClientModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     UserService
