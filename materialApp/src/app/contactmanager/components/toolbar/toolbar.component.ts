@@ -1,6 +1,6 @@
 import { NewContactDialogComponent } from './../new-contact-dialog/new-contact-dialog.component';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,8 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  
+
   @Output() toggleSidenav = new EventEmitter<void>();
+  @Output() toggleDirection = new EventEmitter<void>();
+  @Output() toggleTheme = new EventEmitter<void>();
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
@@ -21,8 +23,22 @@ export class ToolbarComponent implements OnInit {
   }
 
   openAddContactDialog() {
+
     let dialogRef = this.dialog.open(NewContactDialogComponent,{
-      width: '450px'      
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      result.id &&  this.openSnackBar("Contact added successfully","navigate")
+        .onAction().subscribe(() => {
+          this.router.navigate(["/contactmanager",result.id]);
+        });
+    });
+  }
+
+  openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar> {
+    return this.snackBar.open(message, action, {
+      duration: 5000
     })
   }
 

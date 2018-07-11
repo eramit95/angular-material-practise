@@ -12,25 +12,28 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  
+
     <mat-form-field>
       <input matInput placeholder="Name" [formControl]="name" [(ngModel)]="user.name">
       <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
-  
+
     <mat-form-field>
       <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="user.date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-  
+
     <mat-form-field class="example-full-width">
       <textarea matInput placeholder="Bio" [(ngModel)]="user.bio"></textarea>
     </mat-form-field>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-icon-button (click)="onSaveUserClicked()">
+  <button mat-button (click)="onSaveUserClicked()">
     <mat-icon>save</mat-icon>Save
+  </button>
+  <button mat-button (click)="dismiss()">
+    <mat-icon>cancel</mat-icon>Cancel
   </button>
 </mat-dialog-actions>

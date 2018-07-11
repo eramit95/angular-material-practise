@@ -14,13 +14,15 @@ const SMALL_WIDTH_BREAKPOINT = 720;
 })
 export class SidenavComponent implements OnInit {
 
+  isDarkTheme: boolean = false;
+  dir: string = 'ltr';
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
   users: Observable<User[]>;
 
   constructor(
-    zone: NgZone, 
+    zone: NgZone,
     private userService: UserService,
     private router: Router) {
     this.mediaMatcher.addListener(mql =>
@@ -43,5 +45,12 @@ export class SidenavComponent implements OnInit {
     return this.mediaMatcher.matches;
   }
 
-}
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+  }
 
+  toggleDirection() {
+    this.dir = this.dir && this.dir === "ltr" ? "rtl": "ltr";
+  }
+
+}
